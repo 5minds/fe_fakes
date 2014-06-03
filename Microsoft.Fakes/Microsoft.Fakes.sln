@@ -11,6 +11,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.3.EntityFramework", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.4.HttpContext", "Module.4.HttpContext\Module.4.HttpContext.csproj", "{7DB790FC-BF1B-428E-B9A6-EAE79B385A02}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Module.Code", "Module.Code", "{6C9C769A-4A7A-4948-A576-879184E4AAB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.3", "Module.3\Module.3.csproj", "{14E5246C-0CA4-4AAF-A55E-C271F017DA6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module.4", "Module.4\Module.4.csproj", "{A1F3131F-556C-40EA-8EEF-9796F0DDD7B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,8 +39,20 @@ Global
 		{7DB790FC-BF1B-428E-B9A6-EAE79B385A02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DB790FC-BF1B-428E-B9A6-EAE79B385A02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DB790FC-BF1B-428E-B9A6-EAE79B385A02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14E5246C-0CA4-4AAF-A55E-C271F017DA6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14E5246C-0CA4-4AAF-A55E-C271F017DA6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14E5246C-0CA4-4AAF-A55E-C271F017DA6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14E5246C-0CA4-4AAF-A55E-C271F017DA6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1F3131F-556C-40EA-8EEF-9796F0DDD7B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1F3131F-556C-40EA-8EEF-9796F0DDD7B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1F3131F-556C-40EA-8EEF-9796F0DDD7B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1F3131F-556C-40EA-8EEF-9796F0DDD7B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{14E5246C-0CA4-4AAF-A55E-C271F017DA6B} = {6C9C769A-4A7A-4948-A576-879184E4AAB8}
+		{A1F3131F-556C-40EA-8EEF-9796F0DDD7B9} = {6C9C769A-4A7A-4948-A576-879184E4AAB8}
 	EndGlobalSection
 EndGlobal

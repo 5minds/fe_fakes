@@ -55,14 +55,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CookieGenerator.cs" />
-    <Compile Include="Session123AuthProivder.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="Module4Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VisibilityProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Fakes Include="Fakes\System.Web.fakes" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Module.4\Module.4.csproj">
+      <Project>{a1f3131f-556c-40ea-8eef-9796f0ddd7b9}</Project>
+      <Name>Module.4</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
