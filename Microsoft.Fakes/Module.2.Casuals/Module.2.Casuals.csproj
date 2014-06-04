@@ -66,6 +66,12 @@
   <ItemGroup>
     <Fakes Include="Fakes\mscorlib.fakes" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Module.2\Module.2.csproj">
+      <Project>{8fa6a00c-65d2-45d5-9cc8-54405a412e22}</Project>
+      <Name>Module.2</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

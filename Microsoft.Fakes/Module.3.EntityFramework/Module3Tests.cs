@@ -75,6 +75,7 @@
             {
                 // arrange
                 var saveCalled = false;
+                var addCalled = false;
                 
                 var movie = new Movie { IMDBId = "tt0089218", Genre = "Adventure", Title = "Die Goonies", Year = new DateTime(1985, 12, 19), Rating = 7.8 };
                 var movies = Enumerable.Empty<Movie>().ToList();
@@ -82,6 +83,7 @@
                 movieSet.AddT0 = (m) =>
                     {
                         movies.Add(m);
+                        addCalled = true;
                         return m;
                     };
                 var context = new ShimMovieDbContext { MoviesGet = () => movieSet.Instance };
@@ -102,7 +104,49 @@
                 // assert
                 Assert.AreEqual(movies.Count, 1);
                 Assert.AreEqual(movies.First().Title, "Die Goonies");
+                Assert.IsTrue(addCalled);
                 Assert.IsTrue(saveCalled);
+            }
+        }
+
+        [TestMethod]
+        public void MoviesAdd_ExistingEntity_ShoudlNotAttach()
+        {
+            using (ShimsContext.Create())
+            {
+                // arrange
+                var saveCalled = false;
+                var addCalled = false;
+
+                var movie = new Movie { IMDBId = "tt0089218", Genre = "Adventure", Title = "Die Goonies", Year = new DateTime(1985, 12, 19), Rating = 7.8 };
+                var movies = new List<Movie> { new Movie { IMDBId = "tt0089218", Genre = "Adventure", Title = "Die Goonies", Year = new DateTime(1985, 12, 19), Rating = 7.8 } };
+                var movieSet = new ShimDbSet<Movie>().Bind(movies.AsQueryable());
+                movieSet.AddT0 = (m) =>
+                {
+                    movies.Add(m);
+                    addCalled = true;
+                    return m;
+                };
+                var context = new ShimMovieDbContext { MoviesGet = () => movieSet.Instance };
+                var baseContext = new ShimDbContext(context)
+                {
+                    SaveChanges = () =>
+                    {
+                        saveCalled = true;
+                        return 0;
+                    }
+                };
+                var factory = new StubIMovieContextFactory { Create = () => context };
+                var repository = new MovieRepository(factory);
+
+                // act
+                repository.AddMovie(movie);
+
+                // assert
+                Assert.AreEqual(movies.Count, 1);
+                Assert.AreEqual(movies.First().Title, "Die Goonies");
+                Assert.IsFalse(addCalled);
+                Assert.IsFalse(saveCalled);
             }
         }
     }

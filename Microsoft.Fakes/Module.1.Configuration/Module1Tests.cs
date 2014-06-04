@@ -13,7 +13,7 @@
         [TestMethod]
         public void TestMethod1()
         {
-            using (var context = ShimsContext.Create())
+            using (ShimsContext.Create())
             {
                 ShimDateTime.NowGet = () => new DateTime(1973, 12, 24);
                 Debug.WriteLine("DateTime.Now [shims-context]: {0}", DateTime.Now);

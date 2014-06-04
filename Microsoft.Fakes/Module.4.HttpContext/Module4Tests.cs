@@ -17,6 +17,7 @@
         {
             using (ShimsContext.Create())
             {
+                // arrange
                 var user = new GenericPrincipal(
                     new GenericIdentity(WindowsIdentity.GetAnonymous().Name),
                     Enumerable.Empty<string>()
@@ -28,8 +29,11 @@
                 var node = new Node { Path = "path/to/the/node", Role = "Administrator" };
 
                 var visibilityProvider = new VisibilityProvider();
+                
+                // act
                 var isVisible = visibilityProvider.IsVisible(node);
 
+                // assert
                 Assert.IsFalse(isVisible);
             }
         }
@@ -39,6 +43,7 @@
         {
             using (ShimsContext.Create())
             {
+                // arrange
                 var user = new GenericPrincipal(WindowsIdentity.GetCurrent(), new[] { "Administrator" });
 
                 var context = new ShimHttpContext { UserGet = () => user };
@@ -47,8 +52,11 @@
                 var node = new Node { Path = "path/to/the/node", Role = "Administrator" };
 
                 var visibilityProvider = new VisibilityProvider();
+                
+                // act
                 var isVisible = visibilityProvider.IsVisible(node);
 
+                // assert
                 Assert.IsTrue(isVisible);
             }
         }
@@ -58,6 +66,7 @@
         {
             using (ShimsContext.Create())
             {
+                // arrange
                 var session = new ShimHttpSessionState
                                   {
                                       SessionIDGet = () => "MyTestSessionId",
@@ -67,8 +76,10 @@
                 var context = new ShimHttpContext { SessionGet = () => session };
                 ShimHttpContext.CurrentGet = () => context;
 
+                // act
                 var isAuthorized = Session123AuthProivder.IsAuthorized();
 
+                // assert
                 Assert.IsTrue(isAuthorized);
             }
         }
@@ -78,6 +89,7 @@
         {
             using (ShimsContext.Create())
             {
+                // arrange
                 var session = new ShimHttpSessionState
                 {
                     SessionIDGet = () => "MyTestSessionId",
@@ -87,8 +99,10 @@
                 var context = new ShimHttpContext { SessionGet = () => session };
                 ShimHttpContext.CurrentGet = () => context;
 
+                // act
                 var isAuthorized = Session123AuthProivder.IsAuthorized();
 
+                // assert
                 Assert.IsFalse(isAuthorized);
             }
         }
@@ -98,6 +112,7 @@
         {
             using (ShimsContext.Create())
             {
+                // arrange
                 var cookieSet = false;
                 var cookies = new ShimHttpCookieCollection
                                   {
@@ -118,8 +133,10 @@
                 var context = new ShimHttpContext { ResponseGet = () => response };
                 ShimHttpContext.CurrentGet = () => context;
 
+                // act
                 CookieGenerator.GenerateCookie("MyTestCookie", "123", new DateTime(2014, 06, 30));
 
+                // assert
                 Assert.IsTrue(cookieSet);
             }
         }
@@ -129,6 +146,7 @@
         {
             using (ShimsContext.Create())
             {
+                // arrange
                 var hasExpired = false;
                 var cookies = new ShimHttpCookieCollection
                 {
@@ -146,8 +164,10 @@
                 var context = new ShimHttpContext { ResponseGet = () => response };
                 ShimHttpContext.CurrentGet = () => context;
 
+                // act
                 CookieGenerator.GenerateCookie("MyTestCookie", "123", new DateTime(2014, 05, 31));
 
+                // assert
                 Assert.IsTrue(hasExpired);
             }
         }
