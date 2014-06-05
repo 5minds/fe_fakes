@@ -26,6 +26,13 @@
                                      new Movie { IMDBId = "tt0120338", Genre = "Romance", Title = "Titanic", Year = new DateTime(1998, 1, 8) },
                                      new Movie { IMDBId = "tt1457767", Genre = "Horror", Title = "Conjuring - Die Heimsuchung", Year = new DateTime(2013, 8, 1) }
                                  };
+
+                /*
+                 * Binding Interfaces
+                 * 
+                 * When a shimmed type implements an interface, the code generator emits a method that allows it to bind all the members 
+                 * from that interface at once.
+                 */
                 var movieSet = new ShimDbSet<Movie>().Bind(movies.AsQueryable());
                 var context = new ShimMovieDbContext { MoviesGet = () => movieSet.Instance };
                 var factory = new StubIMovieContextFactory { Create = () => context };
@@ -47,7 +54,7 @@
                 // arrange
                 var movies = new List<Movie>
                                  {
-                                     new Movie { IMDBId = "tt2388715", Genre = "Horror", Title = "Oculus", Year = new DateTime(2014, 4, 3), Rating = null},
+                                     new Movie { IMDBId = "tt2388715", Genre = "Horror", Title = "Oculus", Year = new DateTime(2014, 4, 3), Rating = null },
                                      new Movie { IMDBId = "tt0063522", Genre = "Horror", Title = "Rosemaries Baby", Year = new DateTime(1968, 10, 17), Rating = 8.0 },
                                      new Movie { IMDBId = "tt0120338", Genre = "Romance", Title = "Titanic", Year = new DateTime(1998, 1, 8), Rating = 7.7 },
                                      new Movie { IMDBId = "tt1457767", Genre = "Horror", Title = "Conjuring - Die Heimsuchung", Year = new DateTime(2013, 8, 1), Rating = 7.6 },
@@ -69,7 +76,7 @@
         }
 
         [TestMethod]
-        public void MoviesAdd_NewEntity_ShoudlAttach()
+        public void MoviesAdd_NewEntity_ShoudlAddAndSave()
         {
             using (ShimsContext.Create())
             {
